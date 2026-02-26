@@ -6,83 +6,199 @@
 <title>THF Studio</title>
 
 <style>
-body {
-    margin: 0;
+body{
+    margin:0;
     font-family: Arial, sans-serif;
-    background: #000;
-    color: white;
-    text-align: center;
+    background: linear-gradient(135deg,#0a0a0a,#141414);
+    color:white;
+    overflow-x:hidden;
 }
 
-header {
-    padding: 60px 20px;
+/* Sections */
+section{
+    padding:120px 20px;
+    text-align:center;
 }
 
-header h1 {
-    font-size: 40px;
-    margin: 0;
+/* Smooth Section Animation */
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition: opacity 1s cubic-bezier(0.22,1,0.36,1),
+                transform 1s cubic-bezier(0.22,1,0.36,1);
 }
 
-.tagline {
-    margin-top: 10px;
-    color: #aaa;
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
 }
 
-.section {
-    padding: 40px 20px;
+/* Hero */
+.hero{
+    padding:180px 20px;
+    background: radial-gradient(circle at center,#1c1c1c,#000);
 }
 
-.gallery img {
-    width: 100%;
-    max-width: 600px;
-    border-radius: 15px;
-    margin-top: 20px;
+.hero h1{
+    font-size:56px;
+    background: linear-gradient(90deg,#00ffcc,#00aaff);
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
-.contact-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 15px 30px;
-    background: #00ff88;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 50px;
+.tagline{
+    margin-top:15px;
+    color:#bbb;
+    font-size:18px;
 }
 
-footer {
-    margin-top: 40px;
-    padding: 20px;
-    font-size: 14px;
-    color: #777;
+/* About */
+.about{
+    max-width:800px;
+    margin:auto;
+    line-height:1.9;
+    color:#ccc;
+}
+
+/* Services */
+.services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    padding:30px;
+    border-radius:20px;
+    opacity:0;
+    transform:translateY(40px);
+    transition: all 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 40px rgba(0,255,200,0.25);
+}
+
+/* Gallery */
+.gallery img{
+    width:100%;
+    max-width:700px;
+    border-radius:20px;
+    margin-top:30px;
+    transition:0.4s ease;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+/* Button */
+.contact-btn{
+    display:inline-block;
+    padding:18px 40px;
+    background:linear-gradient(45deg,#00ffcc,#00ffaa);
+    color:black;
+    font-weight:bold;
+    border-radius:40px;
+    text-decoration:none;
+    margin-top:20px;
+    transition:0.3s ease;
+}
+
+.contact-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 25px #00ffcc;
+}
+
+footer{
+    padding:40px;
+    color:#777;
 }
 </style>
-
 </head>
+
 <body>
 
-<header>
+<section class="hero reveal">
     <h1>THF Studio</h1>
     <div class="tagline">Creative Posters • Thumbnails • Video Edits</div>
-</header>
+</section>
 
-<div class="section">
+<section class="reveal">
+    <h2>About Me</h2>
+    <div class="about">
+        I design bold visuals that instantly capture attention.
+        From high CTR thumbnails to promotional posters and cinematic edits,
+        THF Studio focuses on impact, clarity, and modern aesthetics.
+    </div>
+</section>
+
+<section class="reveal">
+    <h2>Services</h2>
+    <div class="services">
+        <div class="card">
+            <h3>Thumbnail Design</h3>
+            <p>High CTR thumbnails designed to attract instant clicks.</p>
+        </div>
+        <div class="card">
+            <h3>Poster Design</h3>
+            <p>Modern promotional visuals for institutes & brands.</p>
+        </div>
+        <div class="card">
+            <h3>Video Editing</h3>
+            <p>Smooth cinematic edits with clean transitions.</p>
+        </div>
+    </div>
+</section>
+
+<section class="reveal">
     <h2>My Work</h2>
-
-    <!-- Yahan apni image ka naam likho -->
     <div class="gallery">
         <img src="1771855478740.png">
     </div>
-</div>
+</section>
 
-<div class="section">
+<section class="reveal">
     <h2>Contact Me</h2>
-    <a class="contact-btn" href="https://wa.me/+917858921587">WhatsApp Now</a>
-</div>
+    <a class="contact-btn" href="https://wa.me/917858921587">
+        WhatsApp Now
+    </a>
+</section>
 
 <footer>
     © 2026 THF Studio
 </footer>
+
+<script>
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("active");
+
+            const cards = entry.target.querySelectorAll(".card");
+            cards.forEach((card,index)=>{
+                setTimeout(()=>{
+                    card.classList.add("show");
+                }, index * 200);
+            });
+        }
+    });
+},{threshold:0.15});
+
+document.querySelectorAll(".reveal").forEach(el=>{
+    observer.observe(el);
+});
+</script>
 
 </body>
 </html>
