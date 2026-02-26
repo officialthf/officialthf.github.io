@@ -3,261 +3,689 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THF Studio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>THF Studio | Creative Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS START */
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-card: #161616;
+            --accent: #e63946;
+            --accent-glow: rgba(230, 57, 70, 0.4);
+            --text: #f1f1f1;
+            --text-muted: #888;
+            --gradient: linear-gradient(135deg, #e63946 0%, #ff6b6b 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.6;
+            background: var(--bg-dark);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(230, 57, 70, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 50px;
+            padding: 25px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(20px);
             z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .logo {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 700;
         }
 
-        .logo span {
-            color: #00ff99;
-        }
+        .logo span { color: var(--accent); }
 
         .nav-links {
             display: flex;
-            gap: 30px;
-            list-style: none;
+            gap: 40px;
         }
 
         .nav-links a {
-            color: #a0a0a0;
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 14px;
             font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #00ff99;
-        }
+        .nav-links a:hover::after { width: 100%; }
 
-        /* Hero Section */
         header {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+
+        .hero-badge {
+            padding: 8px 20px;
+            background: rgba(230, 57, 70, 0.1);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            border-radius: 50px;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease forwards;
         }
 
         header h1 {
-            font-size: 60px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            animation: fadeInDown 1s;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(48px, 7vw, 90px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            animation: slideDown 1s ease forwards;
         }
 
-        header h1 span {
-            color: #00ff99;
+        header h1 .line { display: block; }
+
+        header h1 .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         header p {
-            font-size: 20px;
-            color: #a0a0a0;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s;
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+            animation: slideUp 1.2s ease forwards;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            animation: slideUp 1.4s ease forwards;
         }
 
         .btn {
-            padding: 15px 40px;
-            background: #00ff99;
-            color: #0a0a0a;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            display: inline-block;
-            transition: 0.3s;
-            animation: fadeInUp 1.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 255, 153, 0.3);
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 40px;
-            margin-bottom: 50px;
-        }
-
-        h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #00ff99;
-            margin: 15px auto 0;
-        }
-
-        /* About */
-        .about p {
-            text-align: center;
-            color: #a0a0a0;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            font-size: 17px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 30px;
-            background: #141414;
-            border-radius: 15px;
-            min-width: 150px;
-        }
-
-        .stat h3 {
-            font-size: 40px;
-            color: #00ff99;
-        }
-
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: #141414;
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .card h3 {
-            color: #00ff99;
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            color: #a0a0a0;
+            padding: 16px 36px;
+            border-radius: 12px;
             font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.4s;
         }
 
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 30px var(--accent-glow);
         }
 
-        .work {
-            background: #141414;
-            border-radius: 20px;
-            overflow: hidden;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px var(--accent-glow);
         }
 
-        .work img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text);
         }
 
-        .work-info {
-            padding: 20px;
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
-        .work-info h3 {
-            color: #00ff99;
-            margin-bottom: 10px;
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: bounce 2s infinite;
         }
 
-        .work-info p {
-            color: #a0a0a0;
-            font-size: 14px;
+        .scroll-indicator span {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* Contact */
-        .contact {
-            text-align: center;
+        .scroll-indicator .arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid var(--text-muted);
+            border-bottom: 2px solid var(--text-muted);
+            transform: rotate(45deg);
         }
 
-        .contact p {
-            color: #a0a0a0;
-            margin-bottom: 30px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: #141414;
-            color: #a0a0a0;
-        }
-
-        footer span {
-            color: #00ff99;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
+        @keyframes slideDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeInUp {
+        @keyframes slideUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">THF <span>Studio</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero-badge">Available for Projects</div>
+        <h1>
+            <span class="line">Creative</span>
+            <span class="line highlight">Design Studio</span>
+        </h1>
+        <p>Transforming ideas into stunning visual experiences that captivate and convert.</p>
+        <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">Start Project</a>
+            <a href="#work" class="btn btn-outline">View Work</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="arrow"></div>
+        </div>
+    </header>
+        <section id="about">
+        <div class="section-header">
+            <h2>About Me</h2>
+            <p>Crafting digital experiences with passion and precision</p>
+        </div>
+        <div class="about-content reveal">
+            <div class="about-text">
+                <p>THF Studio is focused on creating high-impact digital visuals for brands, businesses and content creators. Every design is built with attention to detail, modern layout structure and audience psychology.</p>
+                <p>My goal is not just to design — but to create visuals that convert and stand out from the competition.</p>
+            </div>
+            <div class="about-stats">
+                <div class="stat-box">
+                    <h3>50+</h3>
+                    <p>Projects</p>
+                </div>
+                <div class="stat-box">
+                    <h3>40+</h3>
+                    <p>Clients</p>
+                </div>
+                <div class="stat-box">
+                    <h3>3+</h3>
+                    <p>Years</p>
+                </div>
+                <div class="stat-box">
+                    <h3>100%</h3>
+                    <p>Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-header">
+            <h2>Services</h2>
+            <p>What I can do for you</p>
+        </div>
+        <div class="services-grid reveal">
+            <div class="service-card">
+                <span class="service-number">01</span>
+                <h3>Thumbnail Design</h3>
+                <p>High CTR thumbnails designed to increase clicks and viewer engagement.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-number">02</span>
+                <h3>Poster Design</h3>
+                <p>Modern promotional visuals with strong color balance and premium layout.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-number">03</span>
+                <h3>Video Editing</h3>
+                <p>Smooth cinematic edits with clean transitions and engaging storytelling.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-number">04</span>
+                <h3>Brand Identity</h3>
+                <p>Complete branding solutions including logos and visual identity systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <div class="section-header">
+            <h2>My Work</h2>
+            <p>Recent projects</p>
+        </div>
+        <div class="work-grid reveal">
+            <div class="work-item">
+                <div class="work-image">
+                    <img src="1771855478740.png" alt="Digital Training Banner">
+                    <div class="work-overlay">
+                        <h3>Digital Training Banner</h3>
+                    </div>
+                </div>
+                <div class="work-details">
+                    <h3>Digital Training Banner</h3>
+                    <p>Promotional banner for computer training institute with bold typography.</p>
+                    <div class="work-tags">
+                        <span class="tag">Poster</span>
+                        <span class="tag">Branding</span>
+                    </div>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="work-image">
+                    <img src="poster2.png" alt="Restaurant Menu">
+                    <div class="work-overlay">
+                        <h3>Restaurant Menu</h3>
+                    </div>
+                </div>
+                <div class="work-details">
+                    <h3>Restaurant Menu Design</h3>
+                    <p>Premium styled food menu with balanced sections and attractive contrast.</p>
+                    <div class="work-tags">
+                        <span class="tag">Print</span>
+                        <span class="tag">Design</span>
+                    </div>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="work-image">
+                    <img src="thumb2.png" alt="YouTube Thumbnail">
+                    <div class="work-overlay">
+                        <h3>YouTube Thumbnail</h3>
+                    </div>
+                </div>
+                <div class="work-details">
+                    <h3>YouTube Thumbnail</h3>
+                    <p>Emotion-driven thumbnail for higher click-through-rate.</p>
+                    <div class="work-tags">
+                        <span class="tag">YouTube</span>
+                        <span class="tag">Thumbnails</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <section id="contact">
+        <div class="contact-section reveal">
+            <h2>Let's Work Together</h2>
+            <p>Have a project in mind? Let's create something amazing together.</p>
+            <a href="https://wa.me/918709364587" class="contact-btn" target="_blank">
+                WhatsApp Me
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">THF <span>Studio</span></div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 THF Studio. All rights reserved.
+        </div>
+    </footer>
+
+    <style>
+        section {
+            padding: 120px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .stat-box:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .stat-box h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .stat-box p { color: var(--text-muted); font-size: 14px; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: 0.4s;
+        }
+
+        .service-card:hover::before { transform: scaleX(1); }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .service-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 60px;
+            font-weight: 700;
+            color: rgba(230, 57, 70, 0.1);
+            position: absolute;
+            top: 20px;
+            right: 25px;
+        }
+
+        .service-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .work-item {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .work-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-image img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: 0.6s;
+        }
+
+        .work-item:hover .work-image img { transform: scale(1.1); }
+
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13,13,13,0.9), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .work-item:hover .work-overlay { opacity: 1; }
+
+        .work-details { padding: 25px; }
+
+        .work-details h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .work-details p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .work-tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            background: rgba(230, 57, 70, 0.1);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--accent);
+        }
+
+        .contact-section {
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 80px 40px;
+            text-align: center;
+            margin: 0 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .contact-section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 45px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.4s;
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px var(--accent-glow);
+        }
+
+        footer {
+            background: var(--bg-card);
+            padding: 60px 20px 30px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .footer-logo span { color: var(--accent); }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: 0.8s;
+            transform: translateY(60px);
+            transition: 1s ease;
         }
 
         .reveal.active {
@@ -265,123 +693,16 @@
             transform: translateY(0);
         }
 
-        /* Mobile */
         @media (max-width: 768px) {
-            nav { padding: 15px 20px; }
+            nav { padding: 20px; }
             .nav-links { display: none; }
-            header h1 { font-size: 40px; }
-            .stats { flex-direction: column; align-items: center; }
+            .about-content { grid-template-columns: 1fr; gap: 40px; }
+            .cta-group { flex-direction: column; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
         }
-        /* CSS END */
     </style>
-</head>
-<body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">THF <span>Studio</span></div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Hero -->
-    <header id="home">
-        <h1>THF <span>Studio</span></h1>
-        <p>Creative Posters • Thumbnails • Video Edits</p>
-        <a href="#contact" class="btn">Contact Me</a>
-    </header>
-
-    <!-- About -->
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about reveal">
-            <p>THF Studio is focused on creating high-impact digital visuals for brands, businesses and content creators. Every design is built with attention to detail, modern layout structure and audience psychology. My goal is not just to design — but to create visuals that convert and stand out.</p>
-            <div class="stats">
-                <div class="stat">
-                    <h3>50+</h3>
-                    <p>Projects</p>
-                </div>
-                <div class="stat">
-                    <h3>40+</h3>
-                    <p>Clients</p>
-                </div>
-                <div class="stat">
-                    <h3>3+</h3>
-                    <p>Years</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services">
-        <h2>Services</h2>
-        <div class="services-grid reveal">
-            <div class="card">
-                <h3>Thumbnail Design</h3>
-                <p>High CTR thumbnails designed to increase clicks and viewer engagement.</p>
-            </div>
-            <div class="card">
-                <h3>Poster Design</h3>
-                <p>Modern promotional visuals with strong color balance and premium layout.</p>
-            </div>
-            <div class="card">
-                <h3>Video Editing</h3>
-                <p>Smooth cinematic edits with clean transitions and engaging storytelling.</p>
-            </div>
-            <div class="card">
-                <h3>Brand Identity</h3>
-                <p>Complete branding solutions including logos and visual identity.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work -->
-    <section id="work">
-        <h2>My Work</h2>
-        <div class="gallery-grid reveal">
-            <div class="work">
-                <img src="1771855478740.png" alt="Digital Training Banner">
-                <div class="work-info">
-                    <h3>Digital Training Banner</h3>
-                    <p>Promotional banner for computer training institute.</p>
-                </div>
-            </div>
-            <div class="work">
-                <img src="poster2.png" alt="Restaurant Menu">
-                <div class="work-info">
-                    <h3>Restaurant Menu Design</h3>
-                    <p>Premium styled food menu layout.</p>
-                </div>
-            </div>
-            <div class="work">
-                <img src="thumb2.png" alt="YouTube Thumbnail">
-                <div class="work-info">
-                    <h3>YouTube Thumbnail</h3>
-                    <p>Emotion-driven thumbnail for higher CTR.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="contact">
-        <h2>Contact Me</h2>
-        <p class="reveal">Have a project in mind? Let's work together!</p>
-        <a href="https://wa.me/918709364587" class="btn" target="_blank">WhatsApp Now</a>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 THF <span>Studio</span></p>
-    </footer>
-
-    <!-- JavaScript -->
     <script>
         // Scroll Reveal Animation
         window.addEventListener('scroll', reveal);
