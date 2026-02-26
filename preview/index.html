@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THF Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS START */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #00ff99;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00ff99;
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 60px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            animation: fadeInDown 1s;
+        }
+
+        header h1 span {
+            color: #00ff99;
+        }
+
+        header p {
+            font-size: 20px;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            background: #00ff99;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            transition: 0.3s;
+            animation: fadeInUp 1.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 153, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 50px;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #00ff99;
+            margin: 15px auto 0;
+        }
+
+        /* About */
+        .about p {
+            text-align: center;
+            color: #a0a0a0;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 17px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 30px;
+            background: #141414;
+            border-radius: 15px;
+            min-width: 150px;
+        }
+
+        .stat h3 {
+            font-size: 40px;
+            color: #00ff99;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #141414;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h3 {
+            color: #00ff99;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #a0a0a0;
+            font-size: 15px;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .work {
+            background: #141414;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .work img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .work-info {
+            padding: 20px;
+        }
+
+        .work-info h3 {
+            color: #00ff99;
+            margin-bottom: 10px;
+        }
+
+        .work-info p {
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #141414;
+            color: #a0a0a0;
+        }
+
+        footer span {
+            color: #00ff99;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 0.8s;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            header h1 { font-size: 40px; }
+            .stats { flex-direction: column; align-items: center; }
+        }
+        /* CSS END */
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">THF <span>Studio</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <header id="home">
+        <h1>THF <span>Studio</span></h1>
+        <p>Creative Posters • Thumbnails • Video Edits</p>
+        <a href="#contact" class="btn">Contact Me</a>
+    </header>
+
+    <!-- About -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about reveal">
+            <p>THF Studio is focused on creating high-impact digital visuals for brands, businesses and content creators. Every design is built with attention to detail, modern layout structure and audience psychology. My goal is not just to design — but to create visuals that convert and stand out.</p>
+            <div class="stats">
+                <div class="stat">
+                    <h3>50+</h3>
+                    <p>Projects</p>
+                </div>
+                <div class="stat">
+                    <h3>40+</h3>
+                    <p>Clients</p>
+                </div>
+                <div class="stat">
+                    <h3>3+</h3>
+                    <p>Years</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <h2>Services</h2>
+        <div class="services-grid reveal">
+            <div class="card">
+                <h3>Thumbnail Design</h3>
+                <p>High CTR thumbnails designed to increase clicks and viewer engagement.</p>
+            </div>
+            <div class="card">
+                <h3>Poster Design</h3>
+                <p>Modern promotional visuals with strong color balance and premium layout.</p>
+            </div>
+            <div class="card">
+                <h3>Video Editing</h3>
+                <p>Smooth cinematic edits with clean transitions and engaging storytelling.</p>
+            </div>
+            <div class="card">
+                <h3>Brand Identity</h3>
+                <p>Complete branding solutions including logos and visual identity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work">
+        <h2>My Work</h2>
+        <div class="gallery-grid reveal">
+            <div class="work">
+                <img src="1771855478740.png" alt="Digital Training Banner">
+                <div class="work-info">
+                    <h3>Digital Training Banner</h3>
+                    <p>Promotional banner for computer training institute.</p>
+                </div>
+            </div>
+            <div class="work">
+                <img src="poster2.png" alt="Restaurant Menu">
+                <div class="work-info">
+                    <h3>Restaurant Menu Design</h3>
+                    <p>Premium styled food menu layout.</p>
+                </div>
+            </div>
+            <div class="work">
+                <img src="thumb2.png" alt="YouTube Thumbnail">
+                <div class="work-info">
+                    <h3>YouTube Thumbnail</h3>
+                    <p>Emotion-driven thumbnail for higher CTR.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <p class="reveal">Have a project in mind? Let's work together!</p>
+        <a href="https://wa.me/918709364587" class="btn" target="_blank">WhatsApp Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 THF <span>Studio</span></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll Reveal Animation
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            
+            for(var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+
+                if(revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        // Run once on page load
+        reveal();
+    </script>
+
+</body>
+</html>
